@@ -1,3 +1,14 @@
+import tensorflow as tf
+import numpy as np
+import random
+import os
+
+seed = 42
+os.environ['PYTHONHASHSEED'] = str(seed)
+np.random.seed(seed)
+random.seed(seed)
+tf.random.set_seed(seed)
+
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
