@@ -12,6 +12,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.text import one_hot
 
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+english_stopwords = set(stopwords.words('english'))
+
 # Loading the saved files
 dl_model = load_model('emotion_bidrn_lstm_model.h5')
 
