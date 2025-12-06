@@ -13,7 +13,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.text import one_hot
 
 nltk.download('stopwords')
-nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('wordnet')
 
 from nltk.corpus import stopwords
