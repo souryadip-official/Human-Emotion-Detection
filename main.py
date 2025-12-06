@@ -1,14 +1,3 @@
-import tensorflow as tf
-import numpy as np
-import random
-import os
-
-seed = 42
-os.environ['PYTHONHASHSEED'] = str(seed)
-np.random.seed(seed)
-random.seed(seed)
-tf.random.set_seed(seed)
-
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -31,7 +20,7 @@ from nltk.corpus import stopwords
 english_stopwords = set(stopwords.words('english'))
 
 # Loading the saved files
-dl_model = load_model('emotion_bidrn_lstm_model.h5')
+dl_model = load_model("emotion_model_lstm.keras")
 
 with open('dl_encoder.pkl', 'rb') as file:
     encoder = pickle.load(file)
@@ -39,8 +28,15 @@ with open('dl_encoder.pkl', 'rb') as file:
 with open('vocab_size.pkl', 'rb') as file:
     vocab_size = pickle.load(file)
 
+with open('tokenizer.pkl', 'rb') as file:
+    tokenizer = pickle.load(file)
+
 with open('max_len.pkl', 'rb') as file:
     max_len = pickle.load(file)
+
+print(vocab_size)
+print(max_len)
+print(dl_model.summary())
 
 positive_emotions = ['joy', 'love', 'surprise']
 negative_emotions = ['anger', 'fear', 'sadness']
@@ -77,7 +73,8 @@ if st.button("Predict"):
         text = " ".join(filtered_words)
 
         # One-hot encoding and padding
-        seq = pad_sequences([one_hot(text, n=vocab_size)], maxlen=max_len, padding='pre')
+        seq = tokenizer.texts_to_sequences([text])
+        seq = pad_sequences(seq, maxlen=max_len, padding='pre')
 
         # Prediction
         probs = dl_model.predict(seq)[0]
