@@ -15,6 +15,7 @@ from tensorflow.keras.preprocessing.text import one_hot
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
+
 from nltk.corpus import stopwords
 english_stopwords = set(stopwords.words('english'))
 
@@ -60,7 +61,7 @@ if st.button("Predict"):
         text = re.sub(r'[^a-zA-Z]', ' ', input_text)
         text = re.sub(r'\s+', ' ', text)
         text = text.lower()
-        words = text.split()
+        words = nltk.word_tokenize(text)
         filtered_words = [lemmatizer.lemmatize(word) for word in words if word not in english_stopwords]
         text = " ".join(filtered_words)
 
