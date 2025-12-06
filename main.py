@@ -59,7 +59,7 @@ if st.button("Predict"):
         text = re.sub(r'[^a-zA-Z]', ' ', input_text)
         text = re.sub(r'\s+', ' ', text)
         text = text.lower()
-        words = nltk.word_tokenize(text, language='english')
+        words = text.split()
         filtered_words = [lemmatizer.lemmatize(word) for word in words if word not in english_stopwords]
         text = " ".join(filtered_words)
 
