@@ -14,6 +14,7 @@ from tensorflow.keras.preprocessing.text import one_hot
 
 nltk.download('stopwords')
 nltk.download('punkt')
+nltk.download('wordnet')
 from nltk.corpus import stopwords
 english_stopwords = set(stopwords.words('english'))
 
